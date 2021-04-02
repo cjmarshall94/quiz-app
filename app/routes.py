@@ -1,7 +1,7 @@
-from flask import Flask, render_template, request, url_for, redirect
+from flask import render_template, request, url_for, redirect
 import random, copy
 
-app = Flask(__name__)
+from app import app 
 
 original_questions_answers = {
     'Alabama': 'Montgomery', 'Alaska': 'Juneau', 'Arizona':'Phoenix', 'Arkansas':'Little Rock',
@@ -87,3 +87,4 @@ def show_result():
 
 if __name__ == "__main__":
 	app.run(debug=True)
+
