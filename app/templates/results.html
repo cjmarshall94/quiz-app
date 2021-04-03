@@ -14,12 +14,7 @@
 
 		<h1>Results</h1>
 
-		{% for table in tables %}
-
-			{{ titles[loop.index] }}
-			{{ table|safe }}
-
-		{% endfor %}
+		{{ results_table_html | safe }}
 
 		<p><a href="/">Play again</a></p>
 

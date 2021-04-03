@@ -47,9 +47,16 @@ def show_result():
 										'Your Answer': ordered_answers
 										})
 
-		print(results_table)
+		# Apply styling to highlight correct / wrong answers
+		def identify_correct_answer(row):
+			if row["Correct Answer"] == row["Your Answer"]:
+				return ['background-color: green']*3
+			else:
+				return ['background-color: red']*3
 
-		return render_template("results.html", tables=[results_table.to_html()], titles=results_table.columns.values)
+		results_table_html = results_table.style.apply(identify_correct_answer, axis=1).render()
+
+		return render_template("results.html", results_table_html=results_table_html)
 
 
 # This page lets you add a question to the quiz
