@@ -1,7 +1,8 @@
 from flask import render_template, request, url_for, redirect
 import random, copy
 
-from app import app 
+from app import app, db
+from app.models import Question
 
 original_questions_answers = {
     'Alabama': 'Montgomery', 'Alaska': 'Juneau', 'Arizona':'Phoenix', 'Arkansas':'Little Rock',
@@ -77,12 +78,39 @@ def quiz():
 		return redirect(url_for("show_result"))
 		
 
+
 @app.route("/results", methods=["GET", "POST"])
 def show_result():
 
 	if request.method == "GET":
 		return render_template("results.html", score=score, correct_answers=correct_answers, user_answers=user_answers, original_questions_answers=original_questions_answers)
 	return redirect(url_for("quiz"))
+
+
+# This page lets you add a question to the quiz
+@app.route("/edit", methods=["GET", "POST"])
+def edit_quiz():
+
+	if request.form:
+		question = request.form["question"]
+		answer = request.form["answer"]
+		record = Question(question=question, answer=answer)
+		db.session.add(record)
+		db.session.commit()
+
+		return redirect(url_for("success"))
+
+	return render_template("edit.html")
+
+
+# After successful edit, this page asks if you want to do the quiz or add another question
+@app.route("/success", methods=["GET", "POST"])
+def success():
+
+	if request.method == "POST":
+		return redirect(url_for("quiz"))
+
+	return render_template("success.html")
 
 
 if __name__ == "__main__":

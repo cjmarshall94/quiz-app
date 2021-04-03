@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block head %}
+
+<title>Add new questions</title>
+
+{% endblock %}
+
+
+{% block body %}
+
+	<form action="/edit" method="POST">
+
+		<p>Question:</p>
+	    <input type="text" name="question">
+
+	    <p>Answer:</p>
+	    <input type="text" name="answer">
+
+	    <input type="submit" value="Add to quiz">
+
+	</form>
+
+{% endblock %}
