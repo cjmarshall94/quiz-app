@@ -14,20 +14,16 @@
 
 		<h1>Results</h1>
 
-		{% for answer in user_answers %}
-			<p>{{ answer }}</p>
-		{% endfor %}
+		{% for table in tables %}
 
-		<p>Questions provided</p>
-
-		{% for question in questions %}
-
-			<tr>
-				<td> {{question.question}}</td>
-				<td> {{question.answer}}</td>
-			</tr>
+			{{ titles[loop.index] }}
+			{{ table|safe }}
 
 		{% endfor %}
+
+		<p><a href="/">Play again</a></p>
+
+		<p><a href="/edit">Edit quiz</a></p>
 		
 	</div>
 

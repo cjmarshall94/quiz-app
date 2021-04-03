@@ -17,12 +17,12 @@
 
 	<div id="quiz-body">
 
-		<form action="{{ url_for('quiz') }}" method="POST">
+		<form action="{{ url_for('show_result') }}" method="POST">
 
 			{% for question in questions %}
 
 				<p>{{ question.question }}</p>
-				<input type="text" name="answer-box">
+				<input type="text" name="{{ question.id }}">
 				<br>
 
 			{% endfor %}
