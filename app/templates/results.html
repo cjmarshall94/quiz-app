@@ -3,27 +3,32 @@
 
 {% block head %}
 
-<title>Country Quiz Results</title>
+	<title>Country Quiz Results</title>
 
 {% endblock %}
 
 
 {% block body %}
 
-<div id="results-content">
+	<div id="results-content">
 
-	<p>You scored {{score|length}} out of 5.</p>
+		<h1>Results</h1>
 
-	<p><strong>Here are the correct answers:</strong></p>
+		{% for answer in user_answers %}
+			<p>{{ answer }}</p>
+		{% endfor %}
 
-	{% for key, value in original_questions_answers.items() if value in correct_answers %}
-	    <p id="answers">{{value}} is the capital of {{key}}.</p>
-  	{% endfor %}
+		<p>Questions provided</p>
 
-	<form action="{{ url_for('show_result') }}" method="POST">
-		<input type="submit" name="play-again" value="Play again">
-	</form>
-	
-</div>
+		{% for question in questions %}
+
+			<tr>
+				<td> {{question.question}}</td>
+				<td> {{question.answer}}</td>
+			</tr>
+
+		{% endfor %}
+		
+	</div>
 
 {% endblock %}

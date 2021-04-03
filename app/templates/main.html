@@ -12,27 +12,20 @@
 
 <div id="quiz">
 	<div id="quiz-title">
-		<h1>State capital quiz</h1>
+		<h1>Quiz</h1>
 	</div>
 
 	<div id="quiz-body">
 
 		<form action="{{ url_for('quiz') }}" method="POST">
 
-			<p>What is the capital of {{q[rand[0]]}}?</p><br>
-			<input type="text" name="val1"><br>
+			{% for question in questions %}
 
-			<p>What is the capital of {{q[rand[1]]}}?</p><br>
-			<input type="text" name="val2"><br>
+				<p>{{ question.question }}</p>
+				<input type="text" name="answer-box">
+				<br>
 
-			<p>What is the capital of {{q[rand[2]]}}?</p><br>
-			<input type="text" name="val3"><br>
-
-			<p>What is the capital of {{q[rand[3]]}}?</p><br>
-			<input type="text" name="val4"><br>
-
-			<p>What is the capital of {{q[rand[4]]}}?</p><br>
-			<input type="text" name="val5"><br>
+			{% endfor %}
 
 			<input type="submit" value="Submit">
 
