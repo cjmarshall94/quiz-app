@@ -104,13 +104,21 @@ def edit_quiz():
 
 
 # After successful edit, this page asks if you want to do the quiz or add another question
-@app.route("/success", methods=["GET", "POST"])
+@app.route("/success", methods=["GET"])
 def success():
 
-	if request.method == "POST":
-		return redirect(url_for("quiz"))
+	questions = Question.query.all()
+	return render_template("success.html", questions=questions)
 
-	return render_template("success.html")
+# Ability to remove questions from the quiz
+@app.route("/delete", methods=["POST"])
+def delete():
+
+    question = request.form.get("question")
+    question_to_delete = Question.query.filter_by(question=question).first()
+    db.session.delete(question_to_delete)
+    db.session.commit()
+    return redirect("/success")
 
 
 if __name__ == "__main__":

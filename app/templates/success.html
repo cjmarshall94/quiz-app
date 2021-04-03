@@ -11,6 +11,21 @@
 
 	<h1>Your question was added to the quiz successfully</h1>
 
+	<p>Currently, the following questions and answers are in the database:</p>
+
+	{% for question in questions %}
+
+		<p>Q: {{ question.question }} // A: {{ question.answer }}</p>
+
+		<form method="POST" action="./delete">
+
+			<input type="hidden" value="{{ question.question }}" name="question">
+			<input type="submit" value="Remove from quiz">
+		
+		</form>
+
+	{% endfor %}
+
 	<p><a href="/edit">Add another question</a></p>
 
 	<p><a href="/">Return to main quiz</a></p>
