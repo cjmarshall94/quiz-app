@@ -30,15 +30,15 @@ def show_result():
 		for key, value in request.form.items():
 			user_answers[key] = value
 
+		# Converting key ot int so dict is in the correct order for comparison with correct answers
+		user_answers = {int(k):v for k,v in user_answers.items()}
+
 		# Order by the question ID
-		ordered_answers = collections.OrderedDict(sorted(user_answers.items()))
+		ordered_answers = [value for key,value in sorted(user_answers.items())]
 
 		# Get the relevant question based on the ID (because want to render out the correct Q/As alongside user's answers)
-		question_ids = ordered_answers.keys()
+		question_ids = user_answers.keys()
 		ordered_quiz_list = Question.query.filter(Question.id.in_(question_ids)).all()
-
-		# We just need the ordered list of values for the front end
-		ordered_answers = ordered_answers.values()
 
 		# Create the results table
 		results_table = pd.DataFrame(data={
@@ -46,6 +46,8 @@ def show_result():
 										'Correct Answer': [question.answer for question in ordered_quiz_list], 
 										'Your Answer': ordered_answers
 										})
+
+		print(results_table)
 
 		return render_template("results.html", tables=[results_table.to_html()], titles=results_table.columns.values)
 
