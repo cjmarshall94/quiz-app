@@ -9,25 +9,50 @@
 
 {% block body %}
 
-	<h1>Your question was added to the quiz successfully</h1>
-
-	<p>Currently, the following questions and answers are in the database:</p>
-
-	{% for question in questions %}
-
-		<p>Q: {{ question.question }} // A: {{ question.answer }}</p>
-
-		<form method="POST" action="./delete">
-
-			<input type="hidden" value="{{ question.question }}" name="question">
-			<input type="submit" value="Remove from quiz">
+	<div class="quiz">
 		
-		</form>
+		<h1>Question added successfully</h1>
 
-	{% endfor %}
+		<p class="tagline">Currently, the following questions and answers are in your quiz. Click 'remove' to delete that particular question.</p>
 
-	<p><a href="/edit">Add another question</a></p>
+		<table id="edit-question-table">
 
-	<p><a href="/">Return to main quiz</a></p>
+			<tr>
+				<th>Question</th>
+				<th>Answer</th>
+				<th>Remove?</th>
+			</tr>
+
+			{% for question in questions %}
+
+				<tr>
+					
+					<td>{{ question.question }}</td>
+					<td>{{ question.answer }}</td>
+					<td>
+						
+						<form method="POST" action="./delete">
+
+							<input type="hidden" value="{{ question.question }}" name="question">
+
+							<div id="remove-question">
+								<input type="submit" value="Remove">
+							</div>
+						
+						</form>
+
+					</td>
+
+				</tr>
+
+			{% endfor %}
+
+		</table>
+
+		<button><a href="/edit">Add another question</a></button><br>
+
+		<button><a href="/">Return to main quiz</a></button><br>
+
+	</div>
 
 {% endblock %}

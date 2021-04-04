@@ -50,11 +50,11 @@ def show_result():
 		# Apply styling to highlight correct / wrong answers
 		def identify_correct_answer(row):
 			if row["Correct Answer"] == row["Your Answer"]:
-				return ['background-color: green']*3
+				return ['background-color: #D7FFD4']*3
 			else:
-				return ['background-color: red']*3
+				return ['background-color: #FFDEDE']*3
 
-		results_table_html = results_table.style.apply(identify_correct_answer, axis=1).render()
+		results_table_html = results_table[["Question", "Correct Answer", "Your Answer"]].style.apply(identify_correct_answer, axis=1).hide_index().render()
 
 		return render_template("results.html", results_table_html=results_table_html)
 

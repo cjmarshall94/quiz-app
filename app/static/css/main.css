@@ -16,12 +16,14 @@ h1 {
 	font-weight: 300;
 	font-size: 3.75em;
 	margin-bottom: 0.4em;
+	color: #272727;
 }
 
 h2 {
 	font-family: Work Sans, sans-serif;
 	font-weight: 500;
 	font-size: 1.5em;
+	color: #272727;
 }
 
 p {
@@ -29,10 +31,17 @@ p {
 	margin-bottom: 0px;
 	font-size: 1.1em;
 	font-weight: 300;
+	color: #272727;
 }
 
-form {
-	padding: 0.6em;
+a {
+	text-decoration: none;
+	color: #272727;
+}
+
+input {
+	width: 100%;
+	margin-bottom: 1.3em;
 }
 
 input[type="text"], textarea {
@@ -41,7 +50,7 @@ input[type="text"], textarea {
 	border-bottom: 1px solid #cccccc;
 	height: 1.75em;
 	font-family: Open Sans, sans-serif;
-	padding: 0.5em;
+	padding: 0.5em 0em 0.5em 0.5em;
 	font-size: 1.1em;
 	font-weight: 300;
 	}
@@ -51,15 +60,28 @@ input[type=text]:focus{
   border: none;
 }
 
-input[type="submit"], textarea {
+input[type="submit"], textarea, button {
 	background-color: #EB5E28;
 	border: none;
-	padding: 1em;
-	height: 3em;
+	padding: 0.75em;
+	height: 2.5em;
 	margin-top: 2em;
 	font-family: Work Sans, sans-serif;
-	font-weight: 500;
-	font-size: 1.5em;
+	font-weight: 400;
+	font-size: 1.25em;
+	text-decoration: none;
+	color: #272727;
+}
+
+
+.quiz {
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+
+.tagline {
+	margin-bottom: 2.5em;
 }
 
 /*-----------------------------------------------------------*/
@@ -103,30 +125,83 @@ input[type="submit"], textarea {
 /*-----------------------------------------------------------*/
 /*-----------------------------------------------------------*/
 
-/* MAIN QUIZ PAGE */
+/* RESULTS PAGE */
 
 /*-----------------------------------------------------------*/
 /*-----------------------------------------------------------*/
 
-#quiz {
+#results-content {
 	margin-left: 5%;
 	margin-right: 5%;
 }
 
-#quiz-body input {
+table {
 	width: 100%;
-	margin-bottom: 1.3em;
 }
 
-#quiz-tagline {
-	padding-left: 0.5em;
-	margin-bottom: 0.5em;
+th, td {
+  padding: 0.1em;
+  text-align: left;
 }
 
-#results-content {
-	display: flex;              /* establish flex container */
-    flex-direction: column;     /* stack flex items vertically */
-    justify-content: center;    /* center items vertically, in this case */
-    align-items: center;        /* center items horizontally, in this case */
+th {
+	font-family: Work Sans, sans-serif;
+	font-weight: 500;
+	font-size: 1.5em;
+}
+
+td {
+	font-family: Open Sans, sans-serif;
+	margin-bottom: 0px;
+	font-size: 1.1em;
+	font-weight: 300;
+}
+
+
+/*-----------------------------------------------------------*/
+/*-----------------------------------------------------------*/
+
+/* NEW QUESTION PAGE */
+
+/*-----------------------------------------------------------*/
+/*-----------------------------------------------------------*/
+
+#new-question {
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+
+/*-----------------------------------------------------------*/
+/*-----------------------------------------------------------*/
+
+/* EDIT QUIZ PAGE */
+
+/*-----------------------------------------------------------*/
+/*-----------------------------------------------------------*/
+
+#remove-question {
+	width: 50%;
+	margin-left: 25%;
+}
+
+#remove-question input[type="submit"] {
+	width: 100%;
+	background-color: #009FB7;
+	color: #f7f7f7;
+	font-weight: 300;
+	font-size: 1.1em;
+}
+
+#edit-question-table, tr, td, th {
+	border: 1px solid #ccc;
+}
+
+#edit-question-table td {
+	font-family: Open Sans, sans-serif;
+	margin-bottom: 0px;
+	font-size: 1.1em;
+	font-weight: 300;
+	color: #272727;
 }
 

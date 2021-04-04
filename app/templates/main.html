@@ -10,10 +10,10 @@
 
 {% block body %}
 
-<div id="quiz">
+<div class="quiz">
 
-	<h1>The Geography Quiz</h1>
-	<p id="quiz-tagline">Test your knowledge with these 5 random questions from your question bank.</p>
+	<h1>Geography Quiz</h1>
+	<p class="tagline">Test your knowledge with these 5 random questions from your question bank.</p>
 
 	<div id="quiz-body">
 
@@ -22,7 +22,7 @@
 			{% for question in questions %}
 
 				<h2>Question {{ loop.index }}: {{ question.question }}</h2>
-				<input type="text" name="{{ question.id }}">
+				<input type="text" name="{{ question.id }}" autocomplete="off">
 				<br>
 
 			{% endfor %}
