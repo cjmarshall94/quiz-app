@@ -11,9 +11,9 @@
 {% block body %}
 
 <div id="quiz">
-	<div id="quiz-title">
-		<h1>Quiz</h1>
-	</div>
+
+	<h1>The Geography Quiz</h1>
+	<p id="quiz-tagline">Test your knowledge with these 5 random questions from your question bank.</p>
 
 	<div id="quiz-body">
 
@@ -21,7 +21,7 @@
 
 			{% for question in questions %}
 
-				<p>{{ question.question }}</p>
+				<h2>Question {{ loop.index }}: {{ question.question }}</h2>
 				<input type="text" name="{{ question.id }}">
 				<br>
 

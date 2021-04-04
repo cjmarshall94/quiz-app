@@ -1,22 +1,126 @@
+/*-----------------------------------------------------------*/
+/*-----------------------------------------------------------*/
+
+/* GENERAL */
+
+/*-----------------------------------------------------------*/
+/*-----------------------------------------------------------*/
+
 body {
-	align-items: center;
-	background-color: #F4FBFF;
+	align-items: left;
+	background-color: #FDFDFD;
 }
+
+h1 {
+	font-family: Work Sans, sans-serif;
+	font-weight: 300;
+	font-size: 3.75em;
+	margin-bottom: 0.4em;
+}
+
+h2 {
+	font-family: Work Sans, sans-serif;
+	font-weight: 500;
+	font-size: 1.5em;
+}
+
+p {
+	font-family: Open Sans, sans-serif;
+	margin-bottom: 0px;
+	font-size: 1.1em;
+	font-weight: 300;
+}
+
+form {
+	padding: 0.6em;
+}
+
+input[type="text"], textarea {
+	background-color: #F9F8F5;
+	border: none;
+	border-bottom: 1px solid #cccccc;
+	height: 1.75em;
+	font-family: Open Sans, sans-serif;
+	padding: 0.5em;
+	font-size: 1.1em;
+	font-weight: 300;
+	}
+
+input[type=text]:focus{
+  outline: 3px solid #EB5E28;
+  border: none;
+}
+
+input[type="submit"], textarea {
+	background-color: #EB5E28;
+	border: none;
+	padding: 1em;
+	height: 3em;
+	margin-top: 2em;
+	font-family: Work Sans, sans-serif;
+	font-weight: 500;
+	font-size: 1.5em;
+}
+
+/*-----------------------------------------------------------*/
+/*-----------------------------------------------------------*/
+
+/* NAVBAR */
+
+/*-----------------------------------------------------------*/
+/*-----------------------------------------------------------*/
+
+.topnav {
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+}
+
+.topnav a {
+	float: left;
+	color: #272727;
+	text-align: center;
+	padding: 18px 24px;
+	text-decoration: none;
+	font-size: 18px;
+	vertical-align: middle;
+	font-family: 'Open Sans';
+	font-weight: 400;
+}
+
+.topnav a:hover {
+  color: #000;
+}
+
+.topnav a img {
+    height: auto;
+    width: auto;
+    max-height: 80px;
+    max-width: 160px;
+}
+
+
+/*-----------------------------------------------------------*/
+/*-----------------------------------------------------------*/
+
+/* MAIN QUIZ PAGE */
+
+/*-----------------------------------------------------------*/
+/*-----------------------------------------------------------*/
 
 #quiz {
-	margin: auto;
-    width: 50%;
-}
-
-#quiz-title {
-	padding: 1em;
-	padding-bottom: 0px;
-	font-family: Nunito, sans-serif;
+	margin-left: 5%;
+	margin-right: 5%;
 }
 
 #quiz-body input {
-	width: 50%;
+	width: 100%;
 	margin-bottom: 1.3em;
+}
+
+#quiz-tagline {
+	padding-left: 0.5em;
+	margin-bottom: 0.5em;
 }
 
 #results-content {
@@ -24,36 +128,5 @@ body {
     flex-direction: column;     /* stack flex items vertically */
     justify-content: center;    /* center items vertically, in this case */
     align-items: center;        /* center items horizontally, in this case */
-}
-
-form {
-	padding: 1em;
-}
-
-p {
-	font-family: Nunito, sans-serif;
-	margin-bottom: 0px;
-	font-size: 1.25em;
-}
-
-input[type="text"], textarea {
-	background-color: #fff;
-	border: 1px solid #cccccc;
-	height: 1.5em;
-	font-size: 1.1em;
-	}
-
-input:focus {
-	outline: none;
-}
-
-input[type="submit"], textarea {
-	background-color: #82D3FF;
-	border: none;
-	padding: 1em;
-	height: 3em;
-	margin-top: 2em;
-	font-family: Nunito, sans-serif;
-	font-size: 1.25em;
 }
 
