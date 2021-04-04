@@ -60,8 +60,8 @@ def show_result():
 
 
 # This page lets you add a question to the quiz
-@app.route("/edit", methods=["GET", "POST"])
-def edit_quiz():
+@app.route("/add", methods=["GET", "POST"])
+def add_question():
 
 	if request.form:
 		question = request.form["question"]
@@ -70,17 +70,17 @@ def edit_quiz():
 		db.session.add(record)
 		db.session.commit()
 
-		return redirect(url_for("success"))
+		return redirect(url_for("edit"))
 
-	return render_template("edit.html")
+	return render_template("add.html")
 
 
 # After successful edit, this page asks if you want to do the quiz or add another question
-@app.route("/success", methods=["GET"])
-def success():
+@app.route("/edit", methods=["GET"])
+def edit():
 
 	questions = Question.query.all()
-	return render_template("success.html", questions=questions)
+	return render_template("edit.html", questions=questions)
 
 
 # Ability to remove questions from the quiz
@@ -91,7 +91,7 @@ def delete():
     question_to_delete = Question.query.filter_by(question=question).first()
     db.session.delete(question_to_delete)
     db.session.commit()
-    return redirect("/success")
+    return redirect("/edit")
 
 
 if __name__ == "__main__":

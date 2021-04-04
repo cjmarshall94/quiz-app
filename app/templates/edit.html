@@ -2,7 +2,7 @@
 
 {% block head %}
 
-<title>Add new questions</title>
+<title>Success</title>
 
 {% endblock %}
 
@@ -10,21 +10,48 @@
 {% block body %}
 
 	<div class="quiz">
-
-		<h1>Add new question</h1>
-		<p class="tagline">Use the form below to add a new question and answer to your quiz. Don't worry, you can remove it later if you need to.</p>
 		
-		<form action="/edit" method="POST">
+		<h1>Edit quiz</h1>
 
-			<h2>New question:</h2>
-		    <input type="text" name="question">
+		<p class="tagline">Currently, the following questions and answers are in your quiz. Click 'remove' to delete that particular question.</p>
 
-		    <h2>New answer:</h2>
-		    <input type="text" name="answer">
+		<table id="edit-question-table">
 
-		    <input type="submit" value="Add to quiz">
+			<tr>
+				<th>Question</th>
+				<th>Answer</th>
+				<th>Remove?</th>
+			</tr>
 
-		</form>
+			{% for question in questions %}
+
+				<tr>
+					
+					<td>{{ question.question }}</td>
+					<td>{{ question.answer }}</td>
+					<td>
+						
+						<form method="POST" action="./delete">
+
+							<input type="hidden" value="{{ question.question }}" name="question">
+
+							<div id="remove-question">
+								<input type="submit" value="Remove">
+							</div>
+						
+						</form>
+
+					</td>
+
+				</tr>
+
+			{% endfor %}
+
+		</table>
+
+		<button><a href="/add">Add another question</a></button><br>
+
+		<button><a href="/">Return to main quiz</a></button><br>
 
 	</div>
 
