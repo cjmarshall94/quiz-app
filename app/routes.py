@@ -56,7 +56,11 @@ def show_result():
 
 		results_table_html = results_table[["Question", "Correct Answer", "Your Answer"]].style.apply(identify_correct_answer, axis=1).hide_index().render()
 
-		return render_template("results.html", results_table_html=results_table_html)
+		# Get number of total questions and number of correct answers
+		num_correct_answers = len(results_table[results_table["Correct Answer"] == results_table["Your Answer"]].Question)
+		num_questions = len(results_table.Question)
+
+		return render_template("results.html", results_table_html=results_table_html, num_correct_answers=num_correct_answers, num_questions=num_questions)
 
 
 # This page lets you add a question to the quiz
