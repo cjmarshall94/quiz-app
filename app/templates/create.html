@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block head %}
+
+<title>Create Quiz</title>
+
+{% endblock %}
+
+{% block body %}
+
+	<div class="quiz">
+
+		<h1>Add new quiz</h1>
+		<p class="tagline">Use the form below to name your new quiz. Don't worry, you can add the questions later.</p>
+		
+		<form action="/create" method="POST">
+
+			<h2>New quiz name:</h2>
+		    <input type="text" name="quiz_name">
+
+		    <input type="submit" value="Create quiz">
+
+		</form>
+
+	</div>
+
+{% endblock %}

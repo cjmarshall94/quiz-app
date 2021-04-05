@@ -3,7 +3,7 @@ import random, copy, collections
 import pandas as pd
 
 from app import app, db
-from app.models import Question
+from app.models import Question, Quiz
 
 # Main quiz page
 @app.route("/", methods=["GET"])
@@ -96,6 +96,29 @@ def delete():
     db.session.delete(question_to_delete)
     db.session.commit()
     return redirect("/edit")
+
+
+# Ability to create a new quiz
+@app.route("/create", methods=["GET", "POST"])
+def create():
+
+	if request.form:
+		name = request.form["quiz_name"]
+		new_quiz = Quiz(name=name)
+		db.session.add(new_quiz)
+		db.session.commit()
+
+		return redirect(url_for("show_quizzes"))
+
+	return render_template("create.html")
+
+
+# View existing quizzes
+@app.route("/show-quizzes", methods=["GET"])
+def show_quizzes():
+
+	quizzes = Quiz.query.all()
+	return render_template("quiz-list.html", quizzes=quizzes)
 
 
 if __name__ == "__main__":
