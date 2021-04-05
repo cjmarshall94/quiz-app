@@ -99,6 +99,15 @@ def edit(quiz_id):
 	# Get the appropriate questions that belong to this quiz
 	questions = Question.query.filter(Question.quiz_id==quiz_id)
 
+	if request.method == "POST":
+		question = request.form["question"]
+		answer = request.form["answer"]
+		record = Question(question=question, answer=answer, quiz_id=quiz_id)
+		db.session.add(record)
+		db.session.commit()
+
+		return render_template("edit.html", questions=questions, quiz_id=quiz_id)
+
 	return render_template("edit.html", questions=questions, quiz_id=quiz_id)
 
 
@@ -128,15 +137,6 @@ def delete():
 def add_question(quiz_id):
 
 	quiz_id = quiz_id
-
-	if request.method == "POST":
-		question = request.form["question"]
-		answer = request.form["answer"]
-		record = Question(question=question, answer=answer, quiz_id=quiz_id)
-		db.session.add(record)
-		db.session.commit()
-
-		return redirect(url_for("edit"), quiz_id=quiz_id)
 
 	return render_template("add.html", quiz_id=quiz_id)
 
