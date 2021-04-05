@@ -5,18 +5,20 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
 
-	{% block head %}{% endblock %}
+	{% block head %}
+	{% endblock %}
 
 </head>
 <body>
 
 	<div class="topnav">
 		<a href="/"><img src="static/images/logo.png"></a>
-		<a class="active" href="/">Play Quiz</a>
-		<a href="/edit">Edit Quiz</a>
+		<a href="/show-quizzes">Quiz List</a>
+		<a href="/edit">Edit Quizzes</a>
 	</div>
 	
-	{% block body %}{% endblock %}
+	{% block body %}
+	{% endblock %}
 
 </body>
 </html>

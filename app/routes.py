@@ -5,7 +5,13 @@ import pandas as pd
 from app import app, db
 from app.models import Question, Quiz
 
+
+# ------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------
 # Main quiz page
+# ------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------
+
 @app.route("/", methods=["GET"])
 def quiz():
 
@@ -19,7 +25,12 @@ def quiz():
 	return render_template("main.html", questions=ordered_quiz_list)
 
 
-# Page to show correct / wrong answers to the quiz
+# ------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------
+# Results page
+# ------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------
+
 @app.route("/results", methods=["POST"])
 def show_result():
 
@@ -63,31 +74,40 @@ def show_result():
 		return render_template("results.html", results_table_html=results_table_html, num_correct_answers=num_correct_answers, num_questions=num_questions)
 
 
-# This page lets you add a question to the quiz
-@app.route("/add", methods=["GET", "POST"])
-def add_question():
+# ------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------
+# Quiz list
+# ------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------
 
-	if request.form:
-		question = request.form["question"]
-		answer = request.form["answer"]
-		record = Question(question=question, answer=answer)
-		db.session.add(record)
-		db.session.commit()
+@app.route("/show-quizzes", methods=["GET"])
+def show_quizzes():
 
-		return redirect(url_for("edit"))
-
-	return render_template("add.html")
+	quizzes = Quiz.query.all()
+	return render_template("quiz-list.html", quizzes=quizzes)
 
 
-# After successful edit, this page asks if you want to do the quiz or add another question
-@app.route("/edit", methods=["GET"])
-def edit():
+# ------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------
+# Edit quiz (show all questions and let you remove questions)
+# ------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------
 
-	questions = Question.query.all()
-	return render_template("edit.html", questions=questions)
+@app.route("/edit/<quiz_id>", methods=["GET", "POST"])
+def edit(quiz_id):
+
+	# Get the appropriate questions that belong to this quiz
+	questions = Question.query.filter(Question.quiz_id==quiz_id)
+
+	return render_template("edit.html", questions=questions, quiz_id=quiz_id)
 
 
-# Ability to remove questions from the quiz
+# ------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------
+# Route to delete question from quiz on /edit/<quiz_id> page
+# ------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------
+
 @app.route("/delete", methods=["POST"])
 def delete():
 
@@ -98,7 +118,34 @@ def delete():
     return redirect("/edit")
 
 
-# Ability to create a new quiz
+# ------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------
+# Add question to quiz
+# ------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------
+
+@app.route("/add/<quiz_id>", methods=["GET", "POST"])
+def add_question(quiz_id):
+
+	quiz_id = quiz_id
+
+	if request.method == "POST":
+		question = request.form["question"]
+		answer = request.form["answer"]
+		record = Question(question=question, answer=answer, quiz_id=quiz_id)
+		db.session.add(record)
+		db.session.commit()
+
+		return redirect(url_for("edit"), quiz_id=quiz_id)
+
+	return render_template("add.html", quiz_id=quiz_id)
+
+
+# ------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------
+# Create a new quiz
+# ------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------
 @app.route("/create", methods=["GET", "POST"])
 def create():
 
@@ -111,14 +158,6 @@ def create():
 		return redirect(url_for("show_quizzes"))
 
 	return render_template("create.html")
-
-
-# View existing quizzes
-@app.route("/show-quizzes", methods=["GET"])
-def show_quizzes():
-
-	quizzes = Quiz.query.all()
-	return render_template("quiz-list.html", quizzes=quizzes)
 
 
 if __name__ == "__main__":
