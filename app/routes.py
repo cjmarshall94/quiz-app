@@ -19,8 +19,6 @@ def quiz(quiz_id):
 
 	quiz = Quiz.query.filter_by(id=quiz_id).first()
 
-	print(quiz.name)
-
 	# Get 5 random questions
 	quiz_list = random.sample(list(questions), 5)
 
@@ -84,7 +82,7 @@ def show_result():
 # ------------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------------
 
-@app.route("/show-quizzes", methods=["GET"])
+@app.route("/", methods=["GET"])
 def show_quizzes():
 
 	quizzes = Quiz.query.all()

@@ -8,16 +8,34 @@
 
 {% block body %}
 
-	<h1>Your Quizzes</h1>
+	<div class="quiz">
+		
+		<h1>Your Quizzes</h1>
 
-	{% for quiz in quizzes %}
+		<table>
 
-		<h2>{{ quiz.name }}</h2>
-		<a href="/edit/{{ quiz.id }}"><p>Edit this quiz</p></a>
-		<a href="/play/{{ quiz.id }}"><p>Play this quiz</p></a>
+			{% for quiz in quizzes %}
 
-	{% endfor %}
+				<tr>
 
-	<button><a href="/create">Create new quiz</a></button>
+					<td>
+						<h2>{{ quiz.name }}</h2>
+					</td>
+
+					<td>
+						<button class="quiz-list-btn blue-btn"><a href="/edit/{{ quiz.id }}">Edit this quiz</a></button>
+						<button class="quiz-list-btn"><a href="/play/{{ quiz.id }}">Play this quiz</a></button>
+					</td>
+								
+				</tr>
+
+			{% endfor %}
+			
+
+		</table>
+
+		<button><a href="/create">Create new quiz</a></button>
+
+	</div>
 
 {% endblock %}
