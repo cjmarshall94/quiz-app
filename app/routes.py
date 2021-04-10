@@ -12,17 +12,21 @@ from app.models import Question, Quiz
 # ------------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------------
 
-@app.route("/", methods=["GET"])
-def quiz():
+@app.route("/play/<quiz_id>", methods=["GET"])
+def quiz(quiz_id):
 
-	questions = Question.query.all()
+	questions = Question.query.filter_by(quiz_id=quiz_id)
+
+	quiz = Quiz.query.filter_by(id=quiz_id).first()
+
+	print(quiz.name)
 
 	# Get 5 random questions
-	quiz_list = random.sample(questions, 5)
+	quiz_list = random.sample(list(questions), 5)
 
 	ordered_quiz_list = sorted(quiz_list, key=lambda x: x.id)
 
-	return render_template("main.html", questions=ordered_quiz_list)
+	return render_template("main.html", questions=ordered_quiz_list, quiz=quiz)
 
 
 # ------------------------------------------------------------------------------------

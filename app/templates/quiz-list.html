@@ -14,7 +14,10 @@
 
 		<h2>{{ quiz.name }}</h2>
 		<a href="/edit/{{ quiz.id }}"><p>Edit this quiz</p></a>
+		<a href="/play/{{ quiz.id }}"><p>Play this quiz</p></a>
 
 	{% endfor %}
+
+	<button><a href="/create">Create new quiz</a></button>
 
 {% endblock %}
