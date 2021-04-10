@@ -121,10 +121,14 @@ def edit(quiz_id):
 def delete():
 
     question = request.form.get("question")
-    question_to_delete = Question.query.filter_by(question=question).first()
+    quiz_id = request.form.get("quiz_id")
+    question_to_delete = Question.query.filter_by(question=question, quiz_id=quiz_id).first()
     db.session.delete(question_to_delete)
     db.session.commit()
-    return redirect("/edit")
+
+    print("quiz_id = {}".format(quiz_id))
+
+    return redirect(url_for("edit", quiz_id=quiz_id))
 
 
 # ------------------------------------------------------------------------------------

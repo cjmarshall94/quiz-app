@@ -31,9 +31,11 @@
 					<td>{{ question.answer }}</td>
 					<td>
 						
-						<form method="POST" action="./delete">
+						<form method="POST" action="/delete">
 
 							<input type="hidden" value="{{ question.question }}" name="question">
+
+							<input type="hidden" value="{{ question.quiz_id }}" name="quiz_id">
 
 							<div id="remove-question">
 								<input type="submit" value="Remove">
