@@ -17,7 +17,7 @@
 
 	<div id="quiz-body">
 
-		<form action="{{ url_for('show_result') }}" method="POST">
+		<form action="/results/{{ quiz.id }}" method="POST">
 
 			{% for question in questions %}
 

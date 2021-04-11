@@ -33,8 +33,8 @@ def quiz(quiz_id):
 # ------------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------------
 
-@app.route("/results", methods=["POST"])
-def show_result():
+@app.route("/results/<quiz_id>", methods=["POST"])
+def show_result(quiz_id):
 
 	if request.method == "POST":
 		
@@ -73,7 +73,8 @@ def show_result():
 		num_correct_answers = len(results_table[results_table["Correct Answer"] == results_table["Your Answer"]].Question)
 		num_questions = len(results_table.Question)
 
-		return render_template("results.html", results_table_html=results_table_html, num_correct_answers=num_correct_answers, num_questions=num_questions)
+		return render_template("results.html", 
+					results_table_html=results_table_html, num_correct_answers=num_correct_answers, num_questions=num_questions, quiz_id=quiz_id)
 
 
 # ------------------------------------------------------------------------------------
